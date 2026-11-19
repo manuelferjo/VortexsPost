@@ -150,7 +150,7 @@ namespace VortexsPost
 				case St.Pending:
 					return "PENDIENTE";
 				case St.Uploading:
-					return (t.Progress >= 0 && t.Progress < 99) ? ("SUBIENDO " + t.Progress + " %") : "PROCESANDO";
+					return (t.Progress >= 0 && t.Progress < 96) ? ("SUBIENDO " + t.Progress + " %") : "PROCESANDO";
 				case St.Ready:
 					return "LISTO";
 				case St.Scheduled:

@@ -530,6 +530,7 @@ namespace VortexsPost
 				q["publish_id"] = publishId;
 				Dictionary<string, object> s = Call("/v2/post/publish/status/fetch/", q);
 				string status = Http.Str(s, "status");
+				t.Msg = WaitText(status, DateTime.UtcNow);
 				if (status == "PUBLISH_COMPLETE")
 				{
 					progress(100);
@@ -595,6 +596,7 @@ namespace VortexsPost
 				q["publish_id"] = publishId;
 				Dictionary<string, object> s = Call("/v2/post/publish/status/fetch/", q);
 				string status = Http.Str(s, "status");
+				t.Msg = WaitText(status, DateTime.UtcNow);
 				if (status == "SEND_TO_USER_INBOX" || status == "PUBLISH_COMPLETE")
 				{
 					progress(100);
@@ -649,6 +651,24 @@ namespace VortexsPost
 				}
 			}
 			return list;
+		}
+
+		// Lo que dice TikTok mientras procesa (se ve en la Cola).
+		private static string WaitText(string status, DateTime now)
+		{
+			string when = " (" + now.ToLocalTime().ToString("HH:mm:ss") + ")";
+			switch (status)
+			{
+			case "PROCESSING_UPLOAD":
+				return "TikTok está procesando el vídeo…" + when;
+			case "PROCESSING_DOWNLOAD":
+				return "TikTok está recogiendo el vídeo…" + when;
+			case "SEND_TO_USER_INBOX":
+			case "PUBLISH_COMPLETE":
+				return "";
+			default:
+				return "Esperando a TikTok" + ((status.Length > 0) ? (": " + status) : "") + "…" + when;
+			}
 		}
 
 		private static string FailText(string reason)

@@ -47,7 +47,7 @@ namespace VortexsPost
 			public override Color CheckPressedBackground { get { return Color.FromArgb(90, Theme.Violet); } }
 		}
 
-		public const string Version = "1.1";
+		public const string Version = "1.2";
 
 		private const int PagePublish = 0;
 
@@ -203,6 +203,7 @@ namespace VortexsPost
 			else if (pub.Busy)
 			{
 				header.Invalidate();
+				queueList.Invalidate();
 			}
 			if (ticks % 5 == 1)
 			{
