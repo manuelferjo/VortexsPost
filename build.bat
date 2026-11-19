@@ -13,7 +13,7 @@ if not exist "res\logo.png" (
   pause
   exit /b 1
 )
-"%CSC%" /nologo /codepage:65001 /optimize+ /target:winexe /out:VortexsPost.exe /win32icon:res\app.ico /r:System.dll /r:System.Security.dll /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Web.Extensions.dll /resource:res\logo.png,VortexsPost.logo.png /resource:res\Outfit-Bold.ttf,VortexsPost.Outfit-Bold.ttf /resource:res\PlusJakartaSans-Regular.ttf,VortexsPost.PlusJakartaSans-Regular.ttf /resource:res\PlusJakartaSans-SemiBold.ttf,VortexsPost.PlusJakartaSans-SemiBold.ttf /resource:res\PlusJakartaSans-Bold.ttf,VortexsPost.PlusJakartaSans-Bold.ttf /resource:res\JetBrainsMono-Medium.ttf,VortexsPost.JetBrainsMono-Medium.ttf src\*.cs
+"%CSC%" /nologo /codepage:65001 /optimize+ /target:winexe /out:VortexsPost.exe /win32icon:res\app.ico /r:System.dll /r:System.Security.dll /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Web.Extensions.dll /r:System.IO.Compression.dll /r:System.IO.Compression.FileSystem.dll /resource:res\logo.png,VortexsPost.logo.png /resource:res\Outfit-Bold.ttf,VortexsPost.Outfit-Bold.ttf /resource:res\PlusJakartaSans-Regular.ttf,VortexsPost.PlusJakartaSans-Regular.ttf /resource:res\PlusJakartaSans-SemiBold.ttf,VortexsPost.PlusJakartaSans-SemiBold.ttf /resource:res\PlusJakartaSans-Bold.ttf,VortexsPost.PlusJakartaSans-Bold.ttf /resource:res\JetBrainsMono-Medium.ttf,VortexsPost.JetBrainsMono-Medium.ttf src\*.cs
 if errorlevel 1 (
   echo.
   echo No se pudo crear VortexsPost.exe. Copia el texto de arriba si pides ayuda.

@@ -210,5 +210,7 @@ namespace VortexsPost
 		public bool KeepAwake = true;
 
 		public string Folder = "";
+
+		public string UpdateSkip = "";   // versión que decidiste saltarte
 	}
 }

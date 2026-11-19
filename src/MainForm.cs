@@ -5,6 +5,7 @@
 //   QueueTab.cs     pestaña Cola (lo programado, lo que se está subiendo y el historial)
 //   SettingsTab.cs  pestaña Ajustes (ajustes guardados y opciones generales)
 //   AccountsTab.cs  pestaña Cuentas (conectar YouTube, TikTok e Instagram)
+//   Updater.cs      actualización automática desde las Releases de GitHub
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -175,6 +176,7 @@ namespace VortexsPost
 				Theme.DarkTitleBar(Handle);
 			};
 			RefreshTikTokInfo();
+			StartUpdateCheck();
 		}
 
 		protected override void SetVisibleCore(bool value)
@@ -736,6 +738,7 @@ namespace VortexsPost
 				WindowState = FormWindowState.Normal;
 			}
 			Activate();
+			OfferPendingUpdate();
 		}
 
 		private void Balloon(string title, string text, bool error)

@@ -8,6 +8,9 @@ namespace VortexsPost
 {
 	internal static class Program
 	{
+		// Versión a la que se acaba de actualizar ("" si no viene de una actualización).
+		public static string UpdatedTo = "";
+
 		[STAThread]
 		private static void Main(string[] args)
 		{
@@ -17,6 +20,25 @@ namespace VortexsPost
 				if (a == "--bandeja" || a == "--tray")
 				{
 					hidden = true;
+				}
+				else if (a.StartsWith("--actualizado="))
+				{
+					UpdatedTo = a.Substring(14);
+				}
+				else if (a.StartsWith("--esperar="))
+				{
+					// Tras actualizar: espera a que la versión vieja se cierre del todo.
+					int pid;
+					if (int.TryParse(a.Substring(10), out pid))
+					{
+						try
+						{
+							System.Diagnostics.Process.GetProcessById(pid).WaitForExit(20000);
+						}
+						catch
+						{
+						}
+					}
 				}
 			}
 			bool created;

@@ -29,6 +29,15 @@ jobs:
           if (-not (Test-Path VortexsPost.exe)) { throw "No se ha creado VortexsPost.exe (mira el paso anterior)" }
           "VortexsPost.exe: $([math]::Round((Get-Item VortexsPost.exe).Length / 1KB)) KB"
 
+      - name: Comprobar que la versión coincide con la etiqueta
+        if: github.event_name == 'release'
+        shell: pwsh
+        env:
+          ETIQUETA: ${{ github.event.release.tag_name }}
+        run: |
+          $v = (Select-String -Path src\MainForm.cs -Pattern 'const string Version = "([^"]+)"').Matches[0].Groups[1].Value
+          if ("v$v" -ne $env:ETIQUETA) { throw "La etiqueta es $env:ETIQUETA pero src\MainForm.cs dice Version = $v. Cámbialo para que coincidan." }
+
       - name: Preparar el ZIP
         shell: pwsh
         run: |

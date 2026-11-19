@@ -2,6 +2,7 @@
 // borrar) y opciones generales (abrir con Windows, bandeja, no suspender, carpeta de vídeos).
 using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
@@ -103,6 +104,15 @@ namespace VortexsPost
 			Label(gen, "CARPETA DE VÍDEOS", 390f, 100f, 260f);
 			fldFolder = NewField(gen, 390f, 118f, 260f, 34f, false);
 			VButton pick = Btn(gen, "Elegir", ButtonKind.Ghost, 658f, 118f, 86f, 34f);
+			VButton upd = Btn(gen, "Versión " + Version + " · Buscar actualizaciones", ButtonKind.Link, 400f, 16f, 344f, 24f);
+			upd.FontSize = 8.5f;
+			upd.Click += delegate
+			{
+				ThreadPool.QueueUserWorkItem(delegate
+				{
+					CheckForUpdate(true);
+				});
+			};
 			Hint(gen, 16f, 162f, 728f, 44f, delegate
 			{
 				return "La carpeta de vídeos es donde se abre «Elegir vídeo»: por ejemplo, la carpeta de Google Drive que compartes con tu editor o la de los clips de Vortexs Live.";

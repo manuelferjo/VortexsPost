@@ -25,3 +25,11 @@ El código está en `src/`:
 | `YouTube.cs`, `TikTok.cs`, `Instagram.cs` | Conexión y subida a cada red |
 | `Model.cs`, `Store.cs` | Datos y `VortexsPost.json` |
 | `Theme.cs`, `VButton.cs`, `Toggle.cs`, `Field.cs`, `Tabs.cs`, `Card.cs`… | Los mismos colores, fuentes y controles que Vortexs Live |
+
+## Publicar una versión (actualización automática)
+
+1. Cambia `Version` en `src/MainForm.cs` (por ejemplo a `1.1`) y añade las novedades al `LEEME.txt`.
+2. Sube los cambios a GitHub.
+3. En **Releases → Draft a new release**, crea la etiqueta `v1.1` (la misma versión con una `v` delante), escribe las novedades y pulsa **Publish release**.
+
+GitHub compila, comprueba que la versión coincide con la etiqueta y adjunta `VortexsPost.zip` a la Release. Al abrirse, Vortexs Post ve la versión nueva, enseña las novedades y se actualiza solo (conserva `VortexsPost.json`).
