@@ -18,4 +18,5 @@ Tus cuentas, ajustes y la cola están en VortexsPost.json (los tokens, cifrados)
 Si mueves el programa a otra carpeta, lleva ese archivo con él.
 
 NOVEDADES
+1.1  TikTok: si la app aún no está auditada, el vídeo va a tus borradores en vez de dar error.
 1.0  Primera versión.

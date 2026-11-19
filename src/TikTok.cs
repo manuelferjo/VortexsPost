@@ -424,6 +424,27 @@ namespace VortexsPost
 			{
 				return SendDraft(t, file, progress, cancel);
 			}
+			try
+			{
+				return PublishDirect(t, file, progress, cancel);
+			}
+			catch (ApiException ex)
+			{
+				// App sin auditar y cuenta pública: TikTok no deja publicar directamente, pero sí mandar
+				// el vídeo a los borradores. Se hace eso en lugar de fallar.
+				if (ex.Message.IndexOf("unaudited_client", StringComparison.OrdinalIgnoreCase) < 0)
+				{
+					throw;
+				}
+				t.Draft = true;
+				string r = SendDraft(t, file, progress, cancel);
+				t.Msg = "TikTok aún no deja publicar directamente (app sin auditar): está en tus borradores. Clic aquí para copiar el texto y publícalo desde la app";
+				return r;
+			}
+		}
+
+		private string PublishDirect(Target t, string file, Action<int> progress, Func<bool> cancel)
+		{
 			CreatorInfo info = ReadInfo();
 			string privacy = t.Privacy;
 			if (info.Privacy.Count > 0 && !info.Privacy.Contains(privacy))
