@@ -1,0 +1,7 @@
+# Tus datos: cuentas (cifradas), cola de publicaciones y ajustes. No se suben nunca.
+VortexsPost.json
+VortexsPost.json.bak
+# Lo que se genera al compilar.
+VortexsPost.exe
+dist/
+*.zip

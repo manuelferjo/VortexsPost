@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía Vortexs Post</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#09090C; --surface:#111116; --elevated:#171720; --line:rgba(255,255,255,.08); --text:#F4F4F5; --muted:#A1A1AA;
+    --violet:#C09AFD; --violet-light:#D6BFFF; --yellow:#EDE103; --red:#FF4655; --green:#34D399;
+    --grad:linear-gradient(135deg,#C09AFD 0%,#E3D5FF 45%,#EDE103 100%);
+  }
+  * { box-sizing:border-box; }
+  html { background:var(--bg); }
+  body { margin:0; color:var(--text); font:16px/1.65 "Plus Jakarta Sans","Segoe UI",system-ui,sans-serif; -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(ellipse 700px 380px at 20% -60px, rgba(192,154,253,.18), transparent 70%),
+      radial-gradient(circle 420px at 95% 160px, rgba(237,225,3,.10), transparent 70%),
+      var(--bg) no-repeat; }
+  ::selection { background:rgba(192,154,253,.3); color:var(--yellow); }
+  main { max-width:780px; margin:0 auto; padding:40px 16px 72px; }
+  header { display:flex; align-items:center; gap:16px; margin:0 0 8px; }
+  header img { width:52px; height:52px; }
+  h1 { font:800 34px/1.1 Outfit,"Segoe UI",sans-serif; letter-spacing:-.025em; margin:0; }
+  h1 span, .grad { background:var(--grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+  .by { font:500 12px "JetBrains Mono",Consolas,monospace; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; }
+  .sub { color:var(--muted); margin:14px 0 30px; font-size:17px; }
+  h2 { font:700 20px/1.3 Outfit,"Segoe UI",sans-serif; letter-spacing:-.02em; margin:0 0 14px; display:flex; align-items:center; gap:12px; }
+  .n { flex:none; width:30px; height:30px; border-radius:50%; background:var(--grad); color:#000; font:700 14px Outfit,sans-serif; display:grid; place-items:center; }
+  section { background:rgba(17,17,22,.85); border:1px solid var(--line); border-radius:24px; padding:24px; margin:0 0 16px; box-shadow:0 8px 32px rgba(0,0,0,.4); }
+  section.hl { border-color:rgba(192,154,253,.35); box-shadow:0 12px 35px rgba(192,154,253,.12); }
+  ol, ul { margin:0; padding-left:22px; }
+  li { margin:6px 0; }
+  li::marker { color:var(--violet); }
+  p { margin:12px 0 0; }
+  b { font-weight:700; }
+  code { background:var(--elevated); border:1px solid var(--line); color:var(--violet-light); padding:2px 7px; border-radius:7px; font:500 14px "JetBrains Mono",Consolas,monospace; overflow-wrap:anywhere; }
+  table { width:100%; border-collapse:collapse; font-size:15px; }
+  td, th { text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tr:last-child td { border-bottom:0; }
+  th { color:var(--muted); font:500 11px "JetBrains Mono",Consolas,monospace; letter-spacing:.08em; text-transform:uppercase; }
+  .flow { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-weight:600; margin:4px 0 0; color:var(--muted); }
+  .flow span { background:var(--elevated); border:1px solid var(--line); color:var(--text); padding:7px 14px; border-radius:999px; }
+  .flow span.on { border-color:rgba(192,154,253,.5); color:var(--violet-light); }
+  .note { border:1px solid rgba(237,225,3,.25); background:rgba(237,225,3,.06); padding:10px 14px; margin:14px 0 0; border-radius:14px; }
+  .ok { border-color:rgba(52,211,153,.25); background:rgba(52,211,153,.06); }
+  .tag { display:inline-block; font:700 11px "JetBrains Mono",Consolas,monospace; letter-spacing:.06em; padding:2px 9px; border-radius:999px; background:rgba(192,154,253,.15); color:var(--violet-light); border:1px solid rgba(192,154,253,.4); vertical-align:middle; margin-left:6px; }
+  kbd { border:1px solid rgba(255,255,255,.14); border-bottom-width:2px; border-radius:6px; padding:1px 7px; font:500 13px "JetBrains Mono",Consolas,monospace; background:var(--elevated); }
+  .opt { color:var(--muted); font-size:14px; }
+  @media (max-width:560px) { section { padding:18px; border-radius:20px; } td, th { padding:8px 4px; } h1 { font-size:28px; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="res/logo.png" alt="">
+    <div>
+      <h1>Vortexs <span>Post</span></h1>
+      <div class="by">by Vortexs · v1.0</div>
+    </div>
+  </header>
+  <p class="sub">Sube un vídeo a <b>YouTube, TikTok e Instagram</b> de una vez: con el mismo título o uno distinto en cada red, ahora o programado, y con ajustes guardados como «mañana a las 15:00».</p>
+
+  <section>
+    <h2>Cómo funciona</h2>
+    <div class="flow"><span>Tu vídeo</span>→<span class="on">Vortexs Post</span>→<span>YouTube</span><span>TikTok</span><span>Instagram</span></div>
+    <p>Usa las APIs oficiales de cada red (nada de bots ni de contraseñas): tú conectas tus cuentas una vez y el programa guarda los permisos cifrados en tu PC.</p>
+    <table style="margin-top:12px">
+      <tr><th>Red</th><th>Cómo se programa</th></tr>
+      <tr><td><b>YouTube</b></td><td>El vídeo se sube en cuanto lo programas y <b>YouTube lo publica solo</b> a la hora elegida, aunque apagues el PC.</td></tr>
+      <tr><td><b>TikTok</b></td><td>TikTok no deja programar desde fuera: Vortexs Post lo sube y lo publica <b>a la hora</b>. El PC tiene que estar encendido con el programa abierto (vale en la bandeja).</td></tr>
+      <tr><td><b>Instagram</b></td><td>Igual que TikTok: el reel se sube 10 minutos antes y se publica a la hora. PC encendido y programa abierto.</td></tr>
+    </table>
+    <p class="note">Si el PC estaba apagado a la hora, lo pendiente se publica en cuanto abras el programa (y en la cola se apunta el retraso). Para que no pase: Ajustes → <b>Abrir con Windows</b> y <b>Que el PC no se suspenda</b>.</p>
+  </section>
+
+  <section class="hl">
+    <h2>Antes de nada: las auditorías <span class="tag">IMPORTANTE</span></h2>
+    <p style="margin-top:0">YouTube y TikTok tratan igual a todas las apps nuevas, también a la tuya aunque sea solo para ti:</p>
+    <ul>
+      <li><b>YouTube:</b> lo que sube un proyecto de Google sin auditar se queda en <b>privado</b>. Hay que rellenar una vez el formulario de auditoría de «YouTube API Services».</li>
+      <li><b>TikTok:</b> una app sin auditar solo publica en <b>«Solo yo»</b> y con la cuenta en <b>privado</b>. Hay que pedir la revisión de la Content Posting API.</li>
+      <li><b>Instagram:</b> funciona ya con tu propia cuenta (la app en modo desarrollo vale para las cuentas que tengan un rol en ella).</li>
+    </ul>
+    <p>Mientras esperas, puedes probarlo todo: los vídeos llegan, pero privados. Las auditorías son gratis y tardan de unos días a unas semanas.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">1</span>Crear el programa</h2>
+    <ol>
+      <li>Descomprime la carpeta y abre <code>build.bat</code>: crea <code>VortexsPost.exe</code> con el compilador que ya trae Windows (como Vortexs Live).</li>
+      <li>O súbelo a un repositorio de GitHub: la pestaña <b>Actions</b> lo compila sola y deja el ZIP para descargar.</li>
+    </ol>
+    <p class="opt">Requisitos: Windows 10 u 11. Tus cuentas y la cola se guardan en <code>VortexsPost.json</code> junto al .exe (los tokens, cifrados: solo valen en tu usuario de Windows).</p>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span>Conectar YouTube</h2>
+    <ol>
+      <li>Puedes usar el <b>mismo proyecto de Google</b> que Vortexs Live: en la pestaña Cuentas pega el mismo <b>Client ID</b> y <b>Client secret</b> (cliente de tipo «TVs y dispositivos de entrada limitada»).</li>
+      <li>Si empiezas de cero: <a href="https://console.cloud.google.com/">Google Cloud</a> → crea un proyecto → <b>APIs y servicios → Biblioteca</b> → activa <b>YouTube Data API v3</b> → <b>Pantalla de consentimiento</b> (externa, añádete como usuario de prueba) → <b>Credenciales → Crear ID de cliente OAuth</b> → tipo <b>TVs y dispositivos de entrada limitada</b>.</li>
+      <li>Pulsa <b>Conectar</b>: se abre google.com/device, escribe el código y elige tu canal.</li>
+      <li>Para publicar en público: pide la auditoría en el formulario <b>YouTube API Services – Audit and Quota Extension</b> (explica que es una herramienta para subir tus propios vídeos).</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span>Conectar TikTok</h2>
+    <ol>
+      <li><a href="https://developers.tiktok.com/apps/">TikTok for Developers</a> → <b>Manage apps → Connect an app</b>.</li>
+      <li>Añade el producto <b>Login Kit</b>: en la plataforma <b>Desktop</b>, como Redirect URI pon <code>http://127.0.0.1:*/callback/</code></li>
+      <li>Añade <b>Content Posting API</b> y activa <b>Direct Post</b>. Permisos: <code>user.info.basic</code> y <code>video.publish</code>.</li>
+      <li>En Cuentas pega el <b>Client key</b> y el <b>Client secret</b> y pulsa <b>Conectar</b>: se abre TikTok en el navegador, autoriza y el programa lo recibe solo.</li>
+      <li>Para probar antes de la auditoría: pon tu cuenta en <b>privado</b> y publica en <b>«Solo yo»</b>. Después pide la revisión de la app (Submit for review) para publicar en público.</li>
+    </ol>
+    <p class="note">TikTok exige que elijas cada vez quién puede verlo (no hay opción marcada por defecto) y enseña tu nombre y el aviso de la «Music Usage Confirmation». Vortexs Post ya lo hace así para que la revisión no ponga pegas. Puedes dejar la privacidad guardada en un ajuste.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span>Conectar Instagram</h2>
+    <ol>
+      <li>Tu cuenta de Instagram tiene que ser <b>profesional</b> (Creador o Empresa).</li>
+      <li><a href="https://developers.facebook.com/apps/">Meta for Developers</a> → <b>Crear app</b> → caso de uso de <b>Instagram</b> (API de Instagram con inicio de sesión de Instagram).</li>
+      <li>En <b>Roles</b>, añade tu cuenta como <b>tester de Instagram</b> y acepta la invitación desde Instagram (Configuración → Apps y sitios web → Invitaciones de tester).</li>
+      <li>En la configuración de la API de Instagram, junto a tu cuenta pulsa <b>Generar token</b> (con los permisos <code>instagram_business_basic</code> y <code>instagram_business_content_publish</code>).</li>
+      <li>Pega el token (empieza por <code>IGAA</code>) en Cuentas y pulsa <b>Conectar</b>. Dura 60 días y el programa lo renueva solo cada semana mientras lo abras.</li>
+    </ol>
+    <p class="opt">También vale un token de Facebook (empieza por <code>EAA</code>) si tu Instagram está unido a una página: el programa busca la página y usa su token.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span>Publicar</h2>
+    <ol>
+      <li><b>Vídeo:</b> arrástralo a la ventana o pulsa «Elegir vídeo». Para las tres redes, mejor vertical 9:16 en MP4.</li>
+      <li><b>Dónde:</b> marca YouTube, TikTok y/o Instagram.</li>
+      <li><b>Todas:</b> título, descripción, hashtags y cuándo. YouTube usa el título como título y pone la descripción y los hashtags debajo; TikTok e Instagram juntan todo en el texto.</li>
+      <li><b>Títulos distintos:</b> elige la red arriba a la derecha y activa <b>Texto propio</b>. Con <b>Hora propia</b>, esa red sale a otra hora (por ejemplo TikTok a las 15:00 e Instagram a las 18:00).</li>
+      <li>Pulsa <b>Programar</b> (o <b>Publicar ahora</b>) y sigue el progreso en la pestaña <b>Cola</b>, donde puedes cancelar, reintentar o abrir lo publicado.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span>Ajustes guardados</h2>
+    <p style="margin-top:0">Deja la pestaña Publicar como la usas siempre (por ejemplo: las tres redes, <b>Mañana</b> a las <b>15:00</b>, TikTok para «Todos», tus hashtags fijos) y pulsa <b>Guardar como ajuste</b>. Luego lo eliges de la lista con un clic.</p>
+    <p>En la pestaña Ajustes marca uno con <b>★ Al abrir</b> para que se aplique solo cada vez que abras el programa (y después de cada publicación). Se guardan las redes, la hora de cada una, los hashtags y las opciones; el título y la descripción no, porque cambian con cada vídeo.</p>
+  </section>
+
+  <section>
+    <h2>Si algo falla</h2>
+    <table>
+      <tr><th>Mensaje</th><th>Qué hacer</th></tr>
+      <tr><td>YouTube lo ha dejado privado</td><td>Falta la auditoría de Google (arriba). Mientras, cámbialo a público a mano en YouTube Studio.</td></tr>
+      <tr><td>unaudited_client_can_only_post_to_private_accounts</td><td>Falta la auditoría de TikTok: pon la cuenta en privado para probar.</td></tr>
+      <tr><td>La sesión ha caducado</td><td>Cuentas → Desconectar → Conectar.</td></tr>
+      <tr><td>Instagram no ha aceptado el vídeo</td><td>Reels: MP4 (H.264, AAC), de 3 s a 15 min, mejor 9:16 y 1080×1920.</td></tr>
+      <tr><td>Con … de retraso</td><td>El programa no estaba abierto a la hora: activa «Abrir con Windows».</td></tr>
+    </table>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,21 @@
+VORTEXS POST 1.0
+================
+
+Sube y programa vídeos en YouTube, TikTok e Instagram a la vez.
+
+1. Abre VortexsPost.exe (o crea el .exe con build.bat).
+2. Pestaña Cuentas: conecta YouTube, TikTok e Instagram (cómo: GUIA.html).
+3. Pestaña Publicar: arrastra el vídeo, elige redes, textos y hora, y pulsa Programar.
+
+IMPORTANTE
+- YouTube y TikTok dejan en privado lo que suben las apps sin auditar. Para publicar
+  en público hay que pedir su auditoría una vez (GUIA.html, "Antes de nada").
+- TikTok e Instagram no se pueden programar desde fuera: el programa los publica a su
+  hora, así que el PC tiene que estar encendido con Vortexs Post abierto (vale en la
+  bandeja). YouTube se publica solo aunque apagues el PC.
+
+Tus cuentas, ajustes y la cola están en VortexsPost.json (los tokens, cifrados).
+Si mueves el programa a otra carpeta, lleva ese archivo con él.
+
+NOVEDADES
+1.0  Primera versión.

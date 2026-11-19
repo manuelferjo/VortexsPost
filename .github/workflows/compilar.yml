@@ -1,0 +1,52 @@
+# Compila Vortexs Post en GitHub con cada cambio (pestaña Actions) y deja el ZIP para descargar.
+name: Compilar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # para adjuntar el ZIP a la Release
+
+jobs:
+  compilar:
+    runs-on: windows-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v7
+
+      - name: Compilar VortexsPost.exe
+        shell: cmd
+        run: build.bat < NUL
+
+      - name: Comprobar que se ha creado el programa
+        shell: pwsh
+        run: |
+          if (-not (Test-Path VortexsPost.exe)) { throw "No se ha creado VortexsPost.exe (mira el paso anterior)" }
+          "VortexsPost.exe: $([math]::Round((Get-Item VortexsPost.exe).Length / 1KB)) KB"
+
+      - name: Preparar el ZIP
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist\VortexsPost\res | Out-Null
+          Copy-Item VortexsPost.exe, GUIA.html, LEEME.txt dist\VortexsPost\
+          Copy-Item res\logo.png dist\VortexsPost\res\
+          Compress-Archive -Path dist\VortexsPost\* -DestinationPath dist\VortexsPost.zip -Force
+
+      - name: Guardar el ZIP (descargable desde la página de esta ejecución)
+        uses: actions/upload-artifact@v7
+        with:
+          name: VortexsPost
+          path: dist/VortexsPost.zip
+
+      - name: Adjuntar el ZIP a la Release
+        if: github.event_name == 'release'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" dist\VortexsPost.zip --clobber --repo $env:GITHUB_REPOSITORY
