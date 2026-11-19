@@ -18,6 +18,8 @@ Tus cuentas, ajustes y la cola están en VortexsPost.json (los tokens, cifrados)
 Si mueves el programa a otra carpeta, lleva ese archivo con él.
 
 NOVEDADES
+1.3  Pestaña Editor: los vídeos que deja tu editor en la carpeta compartida aparecen ahí (verticales para
+     Shorts/Reels/TikTok, horizontales para YouTube) y los apruebas con «Usar».
 1.2  Cola: se ve lo que responde TikTok mientras procesa el vídeo (en vez de quedarse en 96 %).
 1.1  TikTok: si la app aún no está auditada, el vídeo va a tus borradores en vez de dar error.
 1.0  Primera versión.

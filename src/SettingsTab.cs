@@ -101,7 +101,7 @@ namespace VortexsPost
 			tgStartup = Tg(gen, "Abrir con Windows", "Arranca escondido en la bandeja, listo para publicar", 16f, 52f, 350f, 44f);
 			tgTray = Tg(gen, "Seguir en la bandeja al cerrar", "Para que se publique lo programado", 16f, 104f, 350f, 44f);
 			tgAwake = Tg(gen, "Que el PC no se suspenda", "Mientras quede algo por subir o publicar", 390f, 52f, 354f, 44f);
-			Label(gen, "CARPETA DE VÍDEOS", 390f, 100f, 260f);
+			Label(gen, "CARPETA DEL EDITOR", 390f, 100f, 260f);
 			fldFolder = NewField(gen, 390f, 118f, 260f, 34f, false);
 			VButton pick = Btn(gen, "Elegir", ButtonKind.Ghost, 658f, 118f, 86f, 34f);
 			VButton upd = Btn(gen, "Versión " + Version + " · Buscar actualizaciones", ButtonKind.Link, 400f, 16f, 344f, 24f);
@@ -115,7 +115,7 @@ namespace VortexsPost
 			};
 			Hint(gen, 16f, 162f, 728f, 44f, delegate
 			{
-				return "La carpeta de vídeos es donde se abre «Elegir vídeo»: por ejemplo, la carpeta de Google Drive que compartes con tu editor o la de los clips de Vortexs Live.";
+				return "La carpeta que compartes con tu editor (por ejemplo la de Google Drive, sincronizada con Google Drive para ordenador). Sus vídeos nuevos salen en la pestaña Editor y «Elegir vídeo» se abre ahí.";
 			});
 			lock (Store.Lock)
 			{
@@ -155,7 +155,7 @@ namespace VortexsPost
 			{
 				using (FolderBrowserDialog d = new FolderBrowserDialog())
 				{
-					d.Description = "Carpeta donde están tus vídeos";
+					d.Description = "Carpeta compartida con tu editor";
 					if (fldFolder.Box.Text.Length > 0 && System.IO.Directory.Exists(fldFolder.Box.Text))
 					{
 						d.SelectedPath = fldFolder.Box.Text;
@@ -164,6 +164,7 @@ namespace VortexsPost
 					{
 						fldFolder.Box.Text = d.SelectedPath;
 						SaveForm();
+						ScanEditor(true);
 					}
 				}
 			};

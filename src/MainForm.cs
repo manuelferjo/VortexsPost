@@ -2,6 +2,7 @@
 // archivo por pestaña (partial class):
 //   MainForm.cs     esta parte: arranque, cabecera, fondo, bandeja, utilidades de diseño y diálogos
 //   PublishTab.cs   pestaña Publicar (vídeo, redes, textos, horas y opciones)
+//   EditorTab.cs    pestaña Editor (vídeos que deja tu editor en la carpeta compartida)
 //   QueueTab.cs     pestaña Cola (lo programado, lo que se está subiendo y el historial)
 //   SettingsTab.cs  pestaña Ajustes (ajustes guardados y opciones generales)
 //   AccountsTab.cs  pestaña Cuentas (conectar YouTube, TikTok e Instagram)
@@ -47,7 +48,7 @@ namespace VortexsPost
 			public override Color CheckPressedBackground { get { return Color.FromArgb(90, Theme.Violet); } }
 		}
 
-		public const string Version = "1.2";
+		public const string Version = "1.3";
 
 		private const int PagePublish = 0;
 
@@ -57,10 +58,16 @@ namespace VortexsPost
 
 		private const int PageAccounts = 3;
 
+		private const int PageEditor = 4;
+
+		// Página de cada pestaña, en el orden en que se ven: Publicar, Editor, Cola, Ajustes, Cuentas.
+		private static readonly int[] TabPages = new int[5] { PagePublish, PageEditor, PageQueue, PageSettings, PageAccounts };
+
 		private readonly Publisher pub = new Publisher();
 
-		private readonly List<Control>[] pages = new List<Control>[4]
+		private readonly List<Control>[] pages = new List<Control>[5]
 		{
+			new List<Control>(),
 			new List<Control>(),
 			new List<Control>(),
 			new List<Control>(),
@@ -136,17 +143,18 @@ namespace VortexsPost
 			pub.LoadAccounts();
 			loading = true;
 			header = Box(this, 0f, 0f, 800f, 70f, PaintHeader);
-			tabs = new Tabs { Items = new string[4] { "Publicar", "Cola", "Ajustes", "Cuentas" } };
+			tabs = new Tabs { Items = new string[5] { "Publicar", "Editor", "Cola", "Ajustes", "Cuentas" } };
 			Place(this, tabs, 20f, 78f, 760f, 36f);
 			tabs.SelectedChanged += delegate
 			{
-				ShowPage(tabs.Selected);
+				ShowPage(TabPages[tabs.Selected]);
 			};
 			int top = 126;
 			BuildPublish(top);
 			BuildQueue(top);
 			BuildSettings(top);
 			BuildAccounts(top);
+			BuildEditor(top);
 			loading = false;
 			ApplyDefaultPreset();
 			ShowPage(PagePublish);
@@ -222,6 +230,17 @@ namespace VortexsPost
 				{
 				}
 			}
+			// Carpeta del editor: cada 30 s.
+			if (ticks % 30 == 3)
+			{
+				ScanEditor(false);
+			}
+			int ec = editorChanges;
+			if (ec != lastEditorChanges)
+			{
+				lastEditorChanges = ec;
+				RefreshEditorTab();
+			}
 			if (ticks % 60 == 0)
 			{
 				// Cada minuto: el resumen ("mañana 15:00" cambia con la hora) y la cola.
@@ -247,11 +266,20 @@ namespace VortexsPost
 			{
 				queueList.Invalidate();
 			}
+			if (p == PageEditor)
+			{
+				editorList.Invalidate();
+			}
+		}
+
+		private static int TabOf(int page)
+		{
+			return Array.IndexOf(TabPages, page);
 		}
 
 		private void GoPage(int p)
 		{
-			tabs.Selected = p;
+			tabs.Selected = TabOf(p);
 			ShowPage(p);
 		}
 

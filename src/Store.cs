@@ -39,6 +39,10 @@ namespace VortexsPost
 				{
 					D.Presets = new System.Collections.Generic.List<Preset>();
 				}
+				if (D.Editor == null)
+				{
+					D.Editor = new System.Collections.Generic.List<EditorItem>();
+				}
 				if (D.Acc == null)
 				{
 					D.Acc = new Accounts();

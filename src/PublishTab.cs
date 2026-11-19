@@ -152,6 +152,7 @@ namespace VortexsPost
 			clear.Click += delegate
 			{
 				videoPath = "";
+				editorPath = "";
 				dropBox.Invalidate();
 				RefreshSummary();
 			};
@@ -1133,6 +1134,7 @@ namespace VortexsPost
 			}
 			pub.Add(post);
 			pub.Tick();
+			EditorPublished(post.File);
 			// Formulario listo para el siguiente vídeo (se queda el ajuste y los hashtags).
 			videoPath = "";
 			fldTitle.Box.Text = "";

@@ -190,6 +190,26 @@ namespace VortexsPost
 		public long IgExpires;
 	}
 
+	// Vídeo que ha dejado el editor en la carpeta compartida.
+	public class EditorItem
+	{
+		public string Path = "";
+
+		public long Size;
+
+		public long Modified;      // ticks UTC
+
+		public long Seen;          // cuándo apareció (ticks UTC)
+
+		public string State = "nuevo";   // nuevo, usado, descartado
+
+		public int Width;
+
+		public int Height;
+
+		public double Seconds;
+	}
+
 	public class Data
 	{
 		public int Version = 1;
@@ -211,6 +231,10 @@ namespace VortexsPost
 
 		public string Folder = "";
 
-		public string UpdateSkip = "";   // versión que decidiste saltarte
+		public string UpdateSkip = "";
+
+		public List<EditorItem> Editor = new List<EditorItem>();
+
+		public string EditorFolder = "";   // carpeta que se miró la última vez   // versión que decidiste saltarte
 	}
 }
